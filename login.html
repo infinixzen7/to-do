@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Login</title>
+    <!-- Combined Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bg-input: #f1f2f6;
+            --white: #ffffff;
+            --accent-color: #764ba2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+            padding: 20px;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: var(--white);
+            width: 900px;
+            height: 600px;
+            border-radius: 30px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        /* --- Left Side: Visuals --- */
+        .visual-side {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .visual-side::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(118, 75, 162, 0.4), rgba(102, 126, 234, 0.8));
+        }
+
+        .visual-content { position: relative; z-index: 2; }
+        .visual-content h2 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+        .visual-content p { font-size: 0.9rem; opacity: 0.9; }
+
+        /* --- Right Side: Form --- */
+        .form-side {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; cursor: pointer; }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .logo-area:hover .logo-icon { transform: rotate(5deg) scale(1.1); }
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
+        
+        .input-field {
+            width: 100%; padding: 15px;
+            border-radius: 15px; border: 2px solid transparent;
+            background: var(--bg-input); transition: all 0.3s ease; outline: none;
+        }
+        .input-field:hover { background: white; border-color: #dfe6e9; }
+        .input-field:focus { background: white; border-color: var(--accent-color); box-shadow: 0 5px 15px rgba(118, 75, 162, 0.1); }
+
+        .btn-login {
+            width: 100%; padding: 15px;
+            border: none; border-radius: 15px;
+            background: var(--primary-gradient);
+            color: white; font-weight: 600; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
+        }
+        .btn-login:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4); filter: brightness(1.1); }
+
+        .divider {
+            margin: 25px 0; text-align: center;
+            position: relative; border-bottom: 1px solid #dfe6e9;
+        }
+        .divider span {
+            position: absolute; top: -10px; left: 50%;
+            transform: translateX(-50%); background: white;
+            padding: 0 15px; color: var(--text-light); font-size: 0.8rem;
+        }
+
+        .btn-google {
+            width: 100%; padding: 12px;
+            border: 2px solid #dfe6e9; border-radius: 15px;
+            background: white; color: var(--text-dark);
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-google:hover { border-color: var(--accent-color); background: #fbfbfb; transform: translateY(-2px); }
+        .google-icon { width: 18px; height: 18px; }
+
+        .signup-text { text-align: center; margin-top: 25px; font-size: 0.9rem; color: var(--text-light); }
+        .signup-text a { color: var(--accent-color); font-weight: 700; text-decoration: none; }
+        .signup-text a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- From Code 2: Enhanced Visual Side -->
+    <div class="visual-side">
+        <div class="visual-content">
+            <h2>Connect with the World</h2>
+            <p>Experience real-time communication with friends and colleagues globally.</p>
+        </div>
+    </div>
+
+    <!-- From Code 1 & 2: Merged Form Logic -->
+    <div class="form-side">
+        <div class="logo-area">
+            <div class="logo-icon">C</div>
+            <span class="logo-text">ChatApp</span>
+        </div>
+
+        <div class="input-group">
+            <label>Email Address</label>
+            <input
+type="email"
+id="email"
+class="input-field"
+placeholder="name@example.com">
+        </div>
+        
+        <div class="input-group">
+            <label>Password</label>
+            <input
+type="password"
+id="password"
+class="input-field"
+placeholder="password">
+        </div>
+
+        <button class="btn-login" id="loginBtn">Login to Account</button>
+
+        <div class="divider"><span>OR CONTINUE WITH</span></div>
+
+        <button class="btn-google" id="googleBtn">
+            <!-- Fixed Google Icon Reference -->
+            <img src="https://www.svgrepo.com/show/452216/google.svg" class="google-icon" alt="Google">
+            Sign in with Google
+        </button>
+
+        <p class="signup-text">
+            Don't have an account? <a href="./new.html">Create one for free</a>
+        </p>
+    </div>
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+GoogleAuthProvider,
+signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+// Replace with your Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyAXh-QGBAslhXjf3FRwNIYA2hNmCzSCPhU",
+  authDomain: "login-f5c62.firebaseapp.com",
+  projectId: "login-f5c62",
+  storageBucket: "login-f5c62.firebasestorage.app",
+  messagingSenderId: "618951041850",
+  appId: "1:618951041850:web:06c744a7d988d86bd9a603",
+  measurementId: "G-TSDBHNZBTP"
+};
+
+
+// Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+// Email Login
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+signInWithEmailAndPassword(auth, email, password)
+
+.then((userCredential)=>{
+
+alert("Login Successful!");
+
+window.location.href="index.html";
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+});
+
+
+// Google Login
+
+const provider = new GoogleAuthProvider();
+
+document.getElementById("googleBtn").addEventListener("click",()=>{
+
+signInWithPopup(auth,provider)
+
+.then((result)=>{
+
+alert("Google Login Successful!");
+
+window.location.href="index.html";
+
+})
+
+.catch((error) => {
+    console.log(error);
+    console.error("Code:", error.code);
+    console.error("Message:", error.message);
+    alert(error.code + "\n" + error.message);
+});
+
+});
+
+</script>
+</body>
+</html>

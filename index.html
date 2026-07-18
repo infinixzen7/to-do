@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ChatApp | Todo Dashboard</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===================== Loader ===================== -->
+
+<div id="loader">
+    <div class="spinner"></div>
+    <h2>Loading Dashboard...</h2>
+</div>
+
+<!-- ===================== Main App ===================== -->
+
+<div id="app" class="hidden">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+                <i class="fa-solid fa-list-check"></i>
+                <h2>ChatApp</h2>
+            </div>
+
+            <div class="profile">
+
+                <img
+                    id="profilePic"
+                    src="https://ui-avatars.com/api/?background=667eea&color=fff&name=User"
+                    alt="Profile">
+
+                <h3 id="userName">Loading...</h3>
+
+                <p id="userEmail">Loading...</p>
+
+            </div>
+
+            <nav>
+
+                <button class="navBtn active" id="allBtn">
+                    <i class="fa-solid fa-list"></i>
+                    All Tasks
+                </button>
+
+                <button class="navBtn" id="completedBtn">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Completed
+                </button>
+
+                <button class="navBtn" id="pendingBtn">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    Pending
+                </button>
+
+                <button class="navBtn" id="themeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                    Dark Mode
+                </button>
+
+            </nav>
+
+        </div>
+
+        <button id="logoutBtn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <!-- Header -->
+
+        <header>
+
+            <div>
+
+                <h1>Welcome Back 👋</h1>
+
+                <p>Manage your daily tasks efficiently.</p>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="card">
+
+                    <h2 id="totalTasks">0</h2>
+
+                    <span>Total Tasks</span>
+
+                </div>
+
+                <div class="card">
+
+                    <h2 id="completedTasks">0</h2>
+
+                    <span>Completed</span>
+
+                </div>
+
+                <div class="card">
+
+                    <h2 id="pendingTasks">0</h2>
+
+                    <span>Pending</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Search -->
+
+        <div class="searchBox">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your tasks...">
+
+        </div>
+
+        <!-- Add Task -->
+
+        <div class="addTask">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter new task">
+
+            <select id="priority">
+
+                <option value="High">🔴 High</option>
+
+                <option value="Medium">🟡 Medium</option>
+
+                <option value="Low">🟢 Low</option>
+
+            </select>
+
+            <button id="addTaskBtn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Task
+
+            </button>
+
+        </div>
+
+        <!-- Progress -->
+
+        <div class="progressBox">
+
+            <div class="progressHeader">
+
+                <span>Progress</span>
+
+                <span id="progressPercent">0%</span>
+
+            </div>
+
+            <div class="progressBar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+        </div>
+
+        <!-- Task List -->
+
+        <div id="taskContainer" class="taskContainer">
+
+            <!-- Firebase Tasks will appear here -->
+
+        </div>
+
+        <!-- Empty State -->
+
+        <div id="emptyState" class="emptyState">
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h2>No Tasks Yet</h2>
+
+            <p>Create your first task to begin.</p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ===================== JavaScript ===================== -->
+
+<script type="module" src="firebase.js"></script>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
