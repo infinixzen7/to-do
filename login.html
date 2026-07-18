@@ -1,275 +1,1100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatApp - Login</title>
-    <!-- Combined Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --text-dark: #2d3436;
-            --text-light: #636e72;
-            --bg-input: #f1f2f6;
-            --white: #ffffff;
-            --accent-color: #764ba2;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+<meta charset="UTF-8">
 
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-size: 200% 200%;
-            animation: gradientMove 15s ease infinite;
-            padding: 20px;
-        }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+<title>TodoFlow | Login</title>
 
-        .container {
-            background: var(--white);
-            width: 900px;
-            height: 600px;
-            border-radius: 30px;
-            display: flex;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-        /* --- Left Side: Visuals --- */
-        .visual-side {
-            flex: 1;
-            background: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px;
-            color: white;
-        }
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-        .visual-side::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(118, 75, 162, 0.4), rgba(102, 126, 234, 0.8));
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-        .visual-content { position: relative; z-index: 2; }
-        .visual-content h2 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
-        .visual-content p { font-size: 0.9rem; opacity: 0.9; }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-        /* --- Right Side: Form --- */
-        .form-side {
-            flex: 1;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+<style>
 
-        .logo-area { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; cursor: pointer; }
-        .logo-icon {
-            width: 40px; height: 40px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-weight: bold; font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-        .logo-area:hover .logo-icon { transform: rotate(5deg) scale(1.1); }
-        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
+}
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
-        
-        .input-field {
-            width: 100%; padding: 15px;
-            border-radius: 15px; border: 2px solid transparent;
-            background: var(--bg-input); transition: all 0.3s ease; outline: none;
-        }
-        .input-field:hover { background: white; border-color: #dfe6e9; }
-        .input-field:focus { background: white; border-color: var(--accent-color); box-shadow: 0 5px 15px rgba(118, 75, 162, 0.1); }
+:root{
 
-        .btn-login {
-            width: 100%; padding: 15px;
-            border: none; border-radius: 15px;
-            background: var(--primary-gradient);
-            color: white; font-weight: 600; font-size: 1rem;
-            cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
-        }
-        .btn-login:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4); filter: brightness(1.1); }
+--primary:#6366f1;
+--secondary:#7c3aed;
+--bg:#eef2ff;
+--white:#fff;
+--text:#1f2937;
+--light:#6b7280;
 
-        .divider {
-            margin: 25px 0; text-align: center;
-            position: relative; border-bottom: 1px solid #dfe6e9;
-        }
-        .divider span {
-            position: absolute; top: -10px; left: 50%;
-            transform: translateX(-50%); background: white;
-            padding: 0 15px; color: var(--text-light); font-size: 0.8rem;
-        }
+}
 
-        .btn-google {
-            width: 100%; padding: 12px;
-            border: 2px solid #dfe6e9; border-radius: 15px;
-            background: white; color: var(--text-dark);
-            display: flex; align-items: center; justify-content: center;
-            gap: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-google:hover { border-color: var(--accent-color); background: #fbfbfb; transform: translateY(-2px); }
-        .google-icon { width: 18px; height: 18px; }
+body{
 
-        .signup-text { text-align: center; margin-top: 25px; font-size: 0.9rem; color: var(--text-light); }
-        .signup-text a { color: var(--accent-color); font-weight: 700; text-decoration: none; }
-        .signup-text a:hover { text-decoration: underline; }
-    </style>
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+background:
+linear-gradient(-45deg,
+#6366f1,
+#8b5cf6,
+#06b6d4,
+#2563eb);
+
+background-size:400% 400%;
+
+animation:bgMove 12s infinite ease;
+
+overflow:scroll;
+
+}
+
+@keyframes bgMove{
+
+0%{background-position:0% 50%;}
+
+50%{background-position:100% 50%;}
+
+100%{background-position:0% 50%;}
+
+}
+
+.container{
+
+width:1100px;
+
+max-width:100%;
+
+min-height:680px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(18px);
+
+border-radius:30px;
+
+display:flex;
+
+overflow:hidden;
+
+box-shadow:0 30px 70px rgba(0,0,0,.25);
+
+animation:fade .7s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+.left{
+
+flex:1;
+
+position:relative;
+
+background:url("https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1200&auto=format&fit=crop")
+center/cover;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:50px;
+
+}
+
+.left::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+}
+
+.leftContent{
+
+position:relative;
+
+z-index:2;
+
+color:white;
+
+}
+
+.leftContent h1{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+}
+
+.leftContent p{
+
+font-size:17px;
+
+line-height:1.8;
+
+opacity:.95;
+
+margin-bottom:40px;
+
+}
+
+.features{
+
+display:grid;
+
+gap:18px;
+
+}
+
+.feature{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-size:16px;
+
+}
+
+.feature i{
+
+width:45px;
+
+height:45px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:12px;
+
+background:rgba(255,255,255,.18);
+
+font-size:18px;
+
+}
+
+.right{
+
+flex:1;
+
+background:white;
+
+padding:60px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.logoIcon{
+
+width:60px;
+
+height:60px;
+
+border-radius:18px;
+
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--secondary));
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+font-size:25px;
+
+}
+
+.logo h2{
+
+font-size:34px;
+
+color:var(--text);
+
+}
+
+.heading{
+
+font-size:32px;
+
+font-weight:700;
+
+color:var(--text);
+
+}
+
+.sub{
+
+margin-top:8px;
+
+margin-bottom:35px;
+
+color:var(--light);
+
+}
+
+.inputGroup{
+
+margin-bottom:22px;
+
+}
+
+.inputGroup label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.inputBox{
+
+position:relative;
+
+}
+
+.inputBox input{
+
+width:100%;
+
+padding:15px 50px 15px 18px;
+
+border-radius:14px;
+
+border:2px solid #e5e7eb;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+.inputBox input:focus{
+
+border-color:var(--primary);
+
+box-shadow:0 0 0 4px rgba(99,102,241,.15);
+
+}
+
+.inputBox i{
+
+position:absolute;
+
+right:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:#888;
+
+cursor:pointer;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+flex-direction:column;
+
+min-height:auto;
+
+}
+
+.left{
+
+height:260px;
+
+}
+
+.right{
+
+padding:35px 25px;
+
+}
+
+.leftContent h1{
+
+font-size:30px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+body{
+
+padding:0;
+
+}
+
+.container{
+
+width:100%;
+
+height:100vh;
+
+border-radius:0;
+
+}
+
+.left{
+
+display:none;
+
+}
+
+.right{
+
+width:100%;
+
+height:100%;
+
+justify-content:center;
+
+padding:30px 22px;
+
+}
+
+.logo{
+
+justify-content:center;
+
+}
+
+.heading{
+
+font-size:28px;
+
+text-align:center;
+
+}
+
+.sub{
+
+text-align:center;
+
+font-size:14px;
+
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="container">
-    <!-- From Code 2: Enhanced Visual Side -->
-    <div class="visual-side">
-        <div class="visual-content">
-            <h2>Connect with the World</h2>
-            <p>Experience real-time communication with friends and colleagues globally.</p>
-        </div>
-    </div>
+<div class="container"><!-- ===========================
+LEFT PANEL
+=========================== -->
 
-    <!-- From Code 1 & 2: Merged Form Logic -->
-    <div class="form-side">
-        <div class="logo-area">
-            <div class="logo-icon">C</div>
-            <span class="logo-text">ChatApp</span>
-        </div>
+<div class="left">
 
-        <div class="input-group">
-            <label>Email Address</label>
-            <input
-type="email"
-id="email"
-class="input-field"
-placeholder="name@example.com">
-        </div>
-        
-        <div class="input-group">
-            <label>Password</label>
-            <input
-type="password"
-id="password"
-class="input-field"
-placeholder="password">
-        </div>
+<div class="leftContent">
 
-        <button class="btn-login" id="loginBtn">Login to Account</button>
+<h1>Stay Organized.</h1>
 
-        <div class="divider"><span>OR CONTINUE WITH</span></div>
+<p>
 
-        <button class="btn-google" id="googleBtn">
-            <!-- Fixed Google Icon Reference -->
-            <img src="https://www.svgrepo.com/show/452216/google.svg" class="google-icon" alt="Google">
-            Sign in with Google
-        </button>
+Manage your daily tasks, track progress,
+and access your todos securely from anywhere.
 
-        <p class="signup-text">
-            Don't have an account? <a href="./new.html">Create one for free</a>
-        </p>
-    </div>
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<i class="fa-solid fa-list-check"></i>
+
+<div>
+
+<h3>Task Management</h3>
+
+<small>Create & organize tasks easily</small>
+
 </div>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-cloud"></i>
+
+<div>
+
+<h3>Cloud Sync</h3>
+
+<small>Your tasks are always backed up</small>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>Secure Login</h3>
+
+<small>Protected with Firebase Authentication</small>
+
+</div>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+<div>
+
+<h3>Works Everywhere</h3>
+
+<small>Desktop • Tablet • Mobile</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ===========================
+RIGHT PANEL
+=========================== -->
+
+<div class="right">
+
+<div class="logo">
+
+<div class="logoIcon">
+
+<i class="fa-solid fa-check"></i>
+
+</div>
+
+<h2>TodoFlow</h2>
+
+</div>
+
+<h1 class="heading">
+
+Welcome Back 👋
+
+</h1>
+
+<p class="sub">
+
+Login to continue managing your tasks.
+
+</p>
+
+<form id="loginForm">
+
+<div class="inputGroup">
+
+<label>Email Address</label>
+
+<div class="inputBox">
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="Enter your email"
+
+required
+
+autocomplete="email">
+
+<i class="fa-solid fa-envelope"></i>
+
+</div>
+
+</div>
+
+
+<div class="inputGroup">
+
+<label>Password</label>
+
+<div class="inputBox">
+
+<input
+
+type="password"
+
+id="password"
+
+placeholder="Enter your password"
+
+required
+
+autocomplete="current-password">
+
+<i
+
+id="togglePassword"
+
+class="fa-solid fa-eye">
+
+</i>
+
+</div>
+
+</div>
+
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+
+<label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;">
+
+<input type="checkbox" id="rememberMe">
+
+Remember Me
+
+</label>
+
+<a
+
+href="forgot-password.html"
+
+style="color:#6366f1;text-decoration:none;font-size:14px;font-weight:600;">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+
+<button
+
+type="submit"
+
+id="loginBtn"
+
+style="
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#6366f1,#7c3aed);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;">
+
+Login
+
+</button>
+
+
+<div style="text-align:center;margin:25px 0;color:#999;position:relative;">
+
+<hr>
+
+<span style="
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:0 15px;">
+
+OR
+
+</span>
+
+</div>
+
+
+<button
+
+type="button"
+
+id="googleBtn"
+
+style="
+width:100%;
+padding:15px;
+border:2px solid #ddd;
+background:white;
+border-radius:14px;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+font-weight:600;
+font-size:15px;">
+
+<img
+
+src="https://www.svgrepo.com/show/475656/google-color.svg"
+
+width="22">
+
+Continue with Google
+
+</button>
+
+
+<p style="margin-top:30px;text-align:center;font-size:15px;">
+
+Don't have an account?
+
+<a
+
+href="new.html"
+
+style="
+color:#6366f1;
+font-weight:700;
+text-decoration:none;">
+
+Create Account
+
+</a>
+
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- Loading Screen -->
+
+<div
+
+id="loading"
+
+style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(17,24,39,.92);
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;">
+
+<div
+
+style="
+width:70px;
+height:70px;
+border:6px solid rgba(255,255,255,.2);
+border-top:6px solid white;
+border-radius:50%;
+animation:spin 1s linear infinite;">
+
+</div>
+
+<h2 style="color:white;margin-top:25px;">
+
+Signing you in...
+
+</h2>
+
+</div>
+
+<style>
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+}
+
+</style>
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+// ==========================
+// Firebase Imports
+// ==========================
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
+
 getAuth,
+
 signInWithEmailAndPassword,
+
 GoogleAuthProvider,
-signInWithPopup
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+signInWithPopup,
+
+onAuthStateChanged,
+
+setPersistence,
+
+browserLocalPersistence,
+
+browserSessionPersistence,
+
+sendPasswordResetEmail
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-// Replace with your Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyAXh-QGBAslhXjf3FRwNIYA2hNmCzSCPhU",
-  authDomain: "login-f5c62.firebaseapp.com",
-  projectId: "login-f5c62",
-  storageBucket: "login-f5c62.firebasestorage.app",
-  messagingSenderId: "618951041850",
-  appId: "1:618951041850:web:06c744a7d988d86bd9a603",
-  measurementId: "G-TSDBHNZBTP"
+// ==========================
+// Firebase Config
+// ==========================
+
+const firebaseConfig={
+
+apiKey:"AIzaSyAXh-QGBAslhXjf3FRwNIYA2hNmCzSCPhU",
+
+authDomain:"login-f5c62.firebaseapp.com",
+
+projectId:"login-f5c62",
+
+storageBucket:"login-f5c62.firebasestorage.app",
+
+messagingSenderId:"618951041850",
+
+appId:"1:618951041850:web:06c744a7d988d86bd9a603",
+
+measurementId:"G-TSDBHNZBTP"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const provider=new GoogleAuthProvider();
+
+
+// ==========================
+// Elements
+// ==========================
+
+const form=document.getElementById("loginForm");
+
+const email=document.getElementById("email");
+
+const password=document.getElementById("password");
+
+const loginBtn=document.getElementById("loginBtn");
+
+const googleBtn=document.getElementById("googleBtn");
+
+const loading=document.getElementById("loading");
+
+const remember=document.getElementById("rememberMe");
+
+const eye=document.getElementById("togglePassword");
+
+
+// ==========================
+// Password Toggle
+// ==========================
+
+eye.onclick=()=>{
+
+password.type=password.type==="password"
+?"text":"password";
+
+eye.classList.toggle("fa-eye");
+
+eye.classList.toggle("fa-eye-slash");
+
 };
 
 
-// Initialize Firebase
+// ==========================
+// Already Logged In
+// ==========================
 
-const app = initializeApp(firebaseConfig);
+onAuthStateChanged(auth,user=>{
 
-const auth = getAuth(app);
+if(user){
+
+window.location.replace("index.html");
+
+}
+
+});
 
 
+// ==========================
 // Email Login
+// ==========================
 
-document.getElementById("loginBtn").addEventListener("click", () => {
+form.addEventListener("submit",async(e)=>{
 
-const email = document.getElementById("email").value;
+e.preventDefault();
 
-const password = document.getElementById("password").value;
+if(
 
-signInWithEmailAndPassword(auth, email, password)
+email.value.trim()==="" ||
 
-.then((userCredential)=>{
+password.value===""
 
-alert("Login Successful!");
+){
 
-window.location.href="index.html";
+alert("Please fill all fields.");
 
-})
+return;
 
-.catch((error)=>{
+}
+
+try{
+
+loading.style.display="flex";
+
+loginBtn.disabled=true;
+
+await setPersistence(
+
+auth,
+
+remember.checked
+
+?browserLocalPersistence
+
+:browserSessionPersistence
+
+);
+
+await signInWithEmailAndPassword(
+
+auth,
+
+email.value.trim(),
+
+password.value
+
+);
+
+window.location.replace("index.html");
+
+}
+
+catch(error){
+
+loading.style.display="none";
+
+loginBtn.disabled=false;
+
+switch(error.code){
+
+case "auth/invalid-credential":
+
+alert("Invalid email or password.");
+
+break;
+
+case "auth/user-not-found":
+
+alert("No account found.");
+
+break;
+
+case "auth/wrong-password":
+
+alert("Incorrect password.");
+
+break;
+
+case "auth/too-many-requests":
+
+alert("Too many attempts. Try again later.");
+
+break;
+
+default:
 
 alert(error.message);
 
-});
+}
+
+}
 
 });
 
 
+// ==========================
 // Google Login
+// ==========================
 
-const provider = new GoogleAuthProvider();
+googleBtn.onclick=async()=>{
 
-document.getElementById("googleBtn").addEventListener("click",()=>{
+try{
 
-signInWithPopup(auth,provider)
+loading.style.display="flex";
 
-.then((result)=>{
+await signInWithPopup(auth,provider);
 
-alert("Google Login Successful!");
+window.location.replace("index.html");
 
-window.location.href="index.html";
+}
 
-})
+catch(error){
 
-.catch((error) => {
-    console.log(error);
-    console.error("Code:", error.code);
-    console.error("Message:", error.message);
-    alert(error.code + "\n" + error.message);
-});
+loading.style.display="none";
 
-});
+alert(error.message);
+
+}
+
+};
+
+
+// ==========================
+// Forgot Password
+// ==========================
+
+const forgot=document.querySelector('a[href="forgot-password.html"]');
+
+forgot.onclick=async(e)=>{
+
+e.preventDefault();
+
+const mail=email.value.trim();
+
+if(mail===""){
+
+alert("Enter your email first.");
+
+return;
+
+}
+
+try{
+
+await sendPasswordResetEmail(auth,mail);
+
+alert("Password reset email sent.");
+
+}
+
+catch(error){
+
+alert(error.message);
+
+}
+
+};
 
 </script>
+
 </body>
+
 </html>
